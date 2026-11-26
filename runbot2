@@ -15,13 +15,26 @@ if (-not (Get-Command py -ErrorAction SilentlyContinue)) {
 $work = Join-Path $env:TEMP "AnimalFarmBot"
 New-Item -ItemType Directory -Force -Path $work | Out-Null
 
-
 $base = "https://raw.githubusercontent.com/Ming2488/5M-AnimalFarmBot2/main"
 
+# โหลดทุกไฟล์ที่บอทต้องใช้ (ทับของเก่าทุกครั้ง)
+$files = @(
+    "animal_farm.py",
+    "requirements.txt",
+    "animal_buy_button.png",
+    "animal_feed_button.png",
+    "animal_collect_button.png",
+    "animal_garage_header.png",
+    "animal_car_card.png",
+    "animal_open_trunk_button.png",
+    "animal_beef_item.png",
+    "animal_max_button.png",
+    "animal_confirm_button.png"
+)
 
-Invoke-WebRequest "$base/animal_farm.py" -OutFile "$work/animal_farm.py"
+foreach ($f in $files) {
+    Write-Host "Downloading $f ..."
+    Invoke-WebRequest -UseBasicParsing "$base/$f" -OutFile (Join-Path $work $f)
+}
 
-py -m pip install pyautogui keyboard
-
-
-py "$work/animal_farm.py"
+py -m pip install -r
