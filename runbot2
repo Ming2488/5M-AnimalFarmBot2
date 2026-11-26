@@ -17,7 +17,7 @@ New-Item -ItemType Directory -Force -Path $work | Out-Null
 
 $base = "https://raw.githubusercontent.com/Ming2488/5M-AnimalFarmBot2/main"
 
-# โหลดทุกไฟล์ที่บอทต้องใช้ (ทับของเก่าทุกครั้ง)
+# โหลดทุกไฟล์ที่บอทต้องใช้
 $files = @(
     "animal_farm.py",
     "requirements.txt",
@@ -37,4 +37,24 @@ foreach ($f in $files) {
     Invoke-WebRequest -UseBasicParsing "$base/$f" -OutFile (Join-Path $work $f)
 }
 
-py -m pip install pyautogui opencv-python pillow keyboard
+# ติดตั้งไลบรารี
+Write-Host "Installing libraries..."
+
+py -m pip install -r "$work\requirements.txt"
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Library installation failed." -ForegroundColor Red
+    Read-Host "Press Enter to exit"
+    exit
+}
+
+# เปิดบอท
+Write-Host "Starting Animal Farm Bot..." -ForegroundColor Green
+
+py "$work\animal_farm.py"
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Bot exited with error." -ForegroundColor Red
+}
+
+Read-Host "Bot finished. Press Enter to exit"
