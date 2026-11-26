@@ -16,7 +16,7 @@ $work = Join-Path $env:TEMP "AnimalFarmBot"
 New-Item -ItemType Directory -Force -Path $work | Out-Null
 
 
-$base = "https://raw.githubusercontent.com/Ming2488FiveM-AnimalFarmBot/main"
+$base = "https://raw.githubusercontent.com/Ming2488/5M-AnimalFarmBot2/main"
 
 
 Invoke-WebRequest "$base/animal_farm.py" -OutFile "$work/animal_farm.py"
