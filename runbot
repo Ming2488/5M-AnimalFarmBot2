@@ -15,14 +15,13 @@ if (-not (Get-Command py -ErrorAction SilentlyContinue)) {
 $work = Join-Path $env:TEMP "AnimalFarmBot"
 New-Item -ItemType Directory -Force -Path $work | Out-Null
 
-# URL ของโค้ด (แก้ USERNAME ให้เป็นชื่อ GitHub ของคุณ)
-$base = "https://raw.githubusercontent.com/USERNAME/FiveM-AnimalFarmBot/main"
 
-# ดาวน์โหลดโค้ด
+$base = "https://raw.githubusercontent.com/Ming2488FiveM-AnimalFarmBot/main"
+
+
 Invoke-WebRequest "$base/animal_farm.py" -OutFile "$work/animal_farm.py"
 
-# ติดตั้งไลบรารี
 py -m pip install pyautogui keyboard
 
-# เปิดบอท
+
 py "$work/animal_farm.py"
