@@ -37,4 +37,4 @@ foreach ($f in $files) {
     Invoke-WebRequest -UseBasicParsing "$base/$f" -OutFile (Join-Path $work $f)
 }
 
-py -m pip install -r
+py -m pip install pyautogui opencv-python pillow keyboard
